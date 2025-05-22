@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+
+    .calculator {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 20px;
+      width: 320px;
+      max-width: 90%;
+    }
+
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 2rem;
+      padding: 10px;
+      margin-bottom: 20px;
+      text-align: right;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    button {
+      padding: 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 15px;
+      background-color: #1f1f1f;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    .operator {
+      background-color: #ff9500;
+      color: white;
+    }
+
+    .equal {
+      background-color: #007aff;
+      grid-column: span 2;
+    }
+
+    .clear {
+      background-color: #ff3b30;
+    }
+
+    @media (max-width: 480px) {
+      .calculator {
+        width: 90%;
+      }
+
+      .display {
+        font-size: 1.5rem;
+      }
+
+      button {
+        padding: 15px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" class="display" id="display" disabled>
+  <div class="buttons">
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button onclick="appendValue('/')">÷</button>
+    <button onclick="appendValue('*')">×</button>
+    <button onclick="appendValue('-')">−</button>
+
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="appendValue('+')">+</button>
+
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button class="operator" onclick="appendValue('.')">.</button>
+
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button class="equal" onclick="calculate()">=</button>
+
+    <button onclick="appendValue('0')" style="grid-column: span 2;">0</button>
+  </div>
+</div>
+
+<script>
+  let display = document.getElementById('display');
+
+  function appendValue(value) {
+    display.value += value;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch {
+      display.value = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>
